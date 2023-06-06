@@ -95,6 +95,7 @@ public class AlbumAdapter  extends RecyclerView.Adapter<AlbumAdapter.ViewHolder>
             onClickListen.onClick(getAdapterPosition());
         }
     }
+
    /* private Filter  filter=new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {

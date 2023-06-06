@@ -1,4 +1,3 @@
-//XDD
 package com.example.mediaplayer.activities;
 import android.Manifest;
 import android.app.Notification;
@@ -61,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
      private HashMap<String, List<Song> >albums=new HashMap<>();
      public static  ArrayList<ArrayList<Song>>al=new ArrayList<>();
-
-
 
     private NotificationManagerCompat notificationManager;
      MediaMetadataRetriever metadataRetriever;
