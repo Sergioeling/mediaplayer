@@ -17,9 +17,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mediaplayer.R;
+import com.example.mediaplayer.activities.PlayerActivity;
 import com.example.mediaplayer.models.Song;
 import com.example.mediaplayer.activities.MainActivity;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import interfaces.OnClickListen;
 
@@ -27,7 +31,7 @@ public class AlbumAdapter  extends RecyclerView.Adapter<AlbumAdapter.ViewHolder>
     private OnClickListen alclicklisten;
 
     //para buscar
-    //ArrayList<ArrayList<Song>>filtered=new ArrayList<>();
+    ArrayList<ArrayList<Song>>filtered=new ArrayList<>();
 
     private  LayoutInflater inflater;
 
@@ -73,7 +77,7 @@ public class AlbumAdapter  extends RecyclerView.Adapter<AlbumAdapter.ViewHolder>
 
     @Override
     public Filter getFilter() {
-        return null;
+        return filter;
     }
 
 
@@ -96,28 +100,45 @@ public class AlbumAdapter  extends RecyclerView.Adapter<AlbumAdapter.ViewHolder>
         }
     }
 
-   /* private Filter  filter=new Filter() {
+    private Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            ArrayList<ArrayList<Song>> filteredList = new ArrayList<>();
+
             if (constraint == null || constraint.length() == 0) {
-                filtered = MainActivity.al;
+                filteredList.addAll(MainActivity.al);
             } else {
-                String filterpattern = constraint.toString().toLowerCase().trim();
-                for (int i=0;i<filtered.size(); i++) {
-                    if ((Song)filtered[i][0].getName().toLowerCase().startsWith(filterpattern) || oneSong.getArtist().toLowerCase().startsWith(filterpattern)) {
-                        filteredList.add(oneSong);
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (ArrayList<Song> albumList : MainActivity.al) {
+                    ArrayList<Song> filteredAlbumList = new ArrayList<>();
+
+                    for (Song song : albumList) {
+                        if (song.getName().toLowerCase().startsWith(filterPattern) || song.getArtist().toLowerCase().startsWith(filterPattern)) {
+                            filteredAlbumList.add(song);
+                        }
+                    }
+
+                    if (!filteredAlbumList.isEmpty()) {
+                        filteredList.add(filteredAlbumList);
                     }
                 }
-
-                return null;
             }
 
-            @Override
-            protected void publishResults (CharSequence constraint, FilterResults results){
-
-            }
+            results.values = filteredList;
+            results.count = filteredList.size();
+            return results;
         }
-    }*/
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            // Aquí deberías actualizar la lista filtrada en tu adaptador o en otro lugar adecuado
+
+        }
+    };
+
+
 
 
 }

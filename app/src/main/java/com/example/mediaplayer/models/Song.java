@@ -1,6 +1,8 @@
 package com.example.mediaplayer.models;
 
 import android.graphics.Bitmap;
+import com.example.mediaplayer.models.Song;
+
 
 public class Song implements Comparable<Song> {
 

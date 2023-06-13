@@ -34,6 +34,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
     private static LayoutInflater inflater;
 
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -159,10 +160,21 @@ private Filter  filter=new Filter() {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-    songs.clear();
+    /*songs.clear();
     songs.add(new Song("Aletorio"));
     songs.addAll((List)results.values);
-    notifyDataSetChanged();
+    notifyDataSetChanged();*/
+        songs.clear();
+        songs.add(new Song("Aleatorio"));
+
+        if (results != null && results.values != null) {
+            List<Song> filteredList = (List<Song>) results.values;
+            songs.addAll(filteredList);
+        }
+
+        notifyDataSetChanged();
+
+
     }
 };
 
