@@ -1,2 +1,1 @@
-Reproductor de música android studio óptativa I 
-TikiRifa 
+Reproductor de música android studio óptativa I
